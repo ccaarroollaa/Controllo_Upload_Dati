@@ -48,7 +48,7 @@ async def scarica_e_unisci_csv(url, cartella_destinazione, file_excel_destinazio
 
         file_csv_content = requests.get(file_csv_url).content
         df = pd.read_csv(BytesIO(file_csv_content))
-        print(f"DataFrame per {file_csv_url}:\n{df}")
+        print(f"DataFrame per {file_csv_url}:\n{df.head()}")  # Stampa solo le prime 5 righe
 
         nome_foglio = os.path.splitext(os.path.basename(file_csv_url))[0]
         df_dict[nome_foglio] = df
@@ -80,20 +80,7 @@ async def invia_notifica_telegram(messaggio):
 async def main():
     csv_file_urls = [
         'https://www.bosl.com.au/IoT/wsudwatch/FYP_SGI/C1.csv',
-        'https://www.bosl.com.au/IoT/wsudwatch/FYP_SGI/C2.csv',
-        'https://www.bosl.com.au/IoT/wsudwatch/FYP_SGI/C3.csv',
-        'https://www.bosl.com.au/IoT/wsudwatch/FYP_SGI/C4.csv',
-        'https://www.bosl.com.au/IoT/wsudwatch/FYP_SGI/C5.csv',
-        'https://www.bosl.com.au/IoT/wsudwatch/FYP_SGI/P1.csv',
-        'https://www.bosl.com.au/IoT/wsudwatch/FYP_SGI/P2.csv',
-        'https://www.bosl.com.au/IoT/wsudwatch/FYP_SGI/P3.csv',
-        'https://www.bosl.com.au/IoT/wsudwatch/FYP_SGI/P4.csv',
-        'https://www.bosl.com.au/IoT/wsudwatch/FYP_SGI/P5.csv',
-        'https://www.bosl.com.au/IoT/wsudwatch/FYP_SGI/S1.csv',
-        'https://www.bosl.com.au/IoT/wsudwatch/FYP_SGI/S2.csv',
-        'https://www.bosl.com.au/IoT/wsudwatch/FYP_SGI/S3.csv',
-        'https://www.bosl.com.au/IoT/wsudwatch/FYP_SGI/S4.csv',
-        'https://www.bosl.com.au/IoT/wsudwatch/FYP_SGI/S5.csv'
+        # Aggiungi gli altri URL
     ]
 
     tasks = [check_remote_file_update(file_url) for file_url in csv_file_urls]
@@ -114,7 +101,6 @@ async def main():
                 message = f"Attenzione! Il file {file_url} non è stato aggiornato da più di 16 minuti."
                 bot.send_message(chat_id=TELEGRAM_CHAT_ID, text=message)
 
-    # Esempio di utilizzo
     url_sito = 'https://www.bosl.com.au/IoT/wsudwatch/FYP_SGI/'
     cartella_destinazione = r'C:\Users\cmare\Desktop'
     file_excel_destinazione = 'Download_separate_sheets.xlsx'
