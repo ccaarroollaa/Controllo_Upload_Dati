@@ -53,7 +53,7 @@ async def scarica_e_unisci_csv(url, cartella_destinazione, file_excel_destinazio
 
         file_csv_content = requests.get(file_csv_url).content
         df = pd.read_csv(BytesIO(file_csv_content))
-        logger.info(f"DataFrame per {file_csv_url}:\n{df.head()}")  # Stampa solo le prime 5 righe
+        logger.info(f"DataFrame per {file_csv_url} ({df.shape[0]} righe, {df.shape[1]} colonne)")
 
         nome_foglio = os.path.splitext(os.path.basename(file_csv_url))[0]
         df_dict[nome_foglio] = df
@@ -116,4 +116,3 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
-
