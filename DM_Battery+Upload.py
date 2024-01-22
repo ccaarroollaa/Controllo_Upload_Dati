@@ -2,6 +2,9 @@ import requests
 from datetime import datetime, timedelta
 from telegram import Bot
 import pytz  # Importa la libreria pytz
+import sys
+sys.stderr = open("/path/to/error.log", "a")
+
 
 # Inserisci il tuo token del bot Telegram
 TELEGRAM_BOT_TOKEN = '6845653655:AAGc__iu9HKR-jfQHNxQ8ukWuYHD-JNjoaE'
