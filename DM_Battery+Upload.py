@@ -15,7 +15,7 @@ TELEGRAM_BOT_TOKEN = '6845653655:AAGc__iu9HKR-jfQHNxQ8ukWuYHD-JNjoaE'
 TELEGRAM_CHAT_ID = '-1002079278580'
 
 # Configura un logger personalizzato
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
 async def check_remote_file_update(file_url, threshold_minutes=16):
